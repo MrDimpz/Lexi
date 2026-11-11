@@ -31,15 +31,11 @@ export class GameWebSocketServer {
           return;
         }
 
-        // In Vite 8, @vite/client still attempts a "vite-hmr" WebSocket connection even when DISABLE_HMR=true.
-        // If Vite did not attach its own upgrade listener (because HMR is disabled), accept it cleanly so @vite/client never errors.
-        const proto = String(request.headers['sec-websocket-protocol'] || '');
-        if (proto.includes('vite-hmr') && httpServer.listenerCount('upgrade') <= 1) {
-          this.viteFallbackWss.handleUpgrade(request, socket, head, (ws) => {
-            ws.send(JSON.stringify({ type: 'connected' }));
-            ws.on('error', () => {});
-          });
-        }
+        // Handle all non-/ws WebSocket upgrade requests (e.g. @vite/client HMR fallback) cleanly so browser never throws WebSocket error
+        this.viteFallbackWss.handleUpgrade(request, socket, head, (ws) => {
+          ws.send(JSON.stringify({ type: 'connected' }));
+          ws.on('error', () => {});
+        });
       } catch {
         // Ignore malformed upgrade URLs
       }
