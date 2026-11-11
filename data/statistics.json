@@ -1,0 +1,57 @@
+{
+  "totalRoundsPlayed": 4,
+  "totalWordsDiscovered": 8,
+  "totalPointsScored": 280,
+  "highestRoundScore": 0,
+  "longestWordFound": "STREAMS",
+  "totalGiftsReceived": 12,
+  "totalLikesReceived": 0,
+  "totalFollowsReceived": 0,
+  "totalSharesReceived": 0,
+  "discoveredWordsGlobal": [
+    "star",
+    "streams"
+  ],
+  "history": [
+    {
+      "roundNumber": 4,
+      "mode": "classic",
+      "score": 0,
+      "targetScore": 225,
+      "wordsFound": 0,
+      "totalPossibleWords": 33,
+      "topPlayer": "Community",
+      "endedAt": 1794404305568
+    },
+    {
+      "roundNumber": 3,
+      "mode": "classic",
+      "score": 0,
+      "targetScore": 190,
+      "wordsFound": 0,
+      "totalPossibleWords": 23,
+      "topPlayer": "Community",
+      "endedAt": 1794404170449
+    },
+    {
+      "roundNumber": 2,
+      "mode": "classic",
+      "score": 0,
+      "targetScore": 155,
+      "wordsFound": 0,
+      "totalPossibleWords": 23,
+      "topPlayer": "Community",
+      "endedAt": 1794404035329
+    },
+    {
+      "roundNumber": 1,
+      "mode": "classic",
+      "score": 0,
+      "targetScore": 120,
+      "wordsFound": 0,
+      "totalPossibleWords": 67,
+      "topPlayer": "Community",
+      "endedAt": 1794403900174
+    }
+  ]
+}

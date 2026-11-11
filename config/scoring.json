@@ -1,0 +1,31 @@
+{
+  "lengthPoints": {
+    "3": 3,
+    "4": 5,
+    "5": 8,
+    "6": 12,
+    "7": 20,
+    "8": 30,
+    "9": 45,
+    "10": 60
+  },
+  "bonuses": {
+    "uniqueWordBonus": 2,
+    "longWordThreshold": 6,
+    "longWordBonus": 5,
+    "fullBoardPangramBonus": 15,
+    "comboWindowMs": 8000,
+    "comboStepBonus": 2,
+    "maxComboMultiplier": 3.0,
+    "communityMilestoneStep": 100,
+    "communityMilestoneBonus": 15
+  },
+  "socialRewards": {
+    "likeMilestoneThreshold": 100,
+    "likeMilestonePoints": 15,
+    "likeMilestoneTimeBonus": 5,
+    "followPoints": 10,
+    "autoRegisterFollower": true,
+    "sharePoints": 15
+  }
+}

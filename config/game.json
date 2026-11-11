@@ -1,0 +1,139 @@
+{
+  "gameMode": "classic",
+  "difficulty": "medium",
+  "autoDifficulty": true,
+  "progressiveElementsEnabled": true,
+  "roundDuration": 120,
+  "prepDuration": 5,
+  "boardSize": 7,
+  "minWordLength": 3,
+  "maxWordLength": 10,
+  "mandatoryCenterLetter": false,
+  "autoNextRound": true,
+  "intermissionDuration": 10,
+  "targetScoreBase": 120,
+  "targetScoreIncrement": 35,
+  "submissionCooldownMs": 1000,
+  "allowChatSubmissions": true,
+  "commandPrefix": "!",
+  "requirePrefixForWords": false,
+  "enabledCommands": {
+    "score": true,
+    "top": true,
+    "words": true,
+    "time": true,
+    "help": true,
+    "join": true,
+    "stats": true
+  },
+  "difficulties": {
+    "easy": {
+      "name": "Easy",
+      "description": "Generous round timer, common letters, 3-letter minimum, and relaxed score targets.",
+      "durationModifierSeconds": 30,
+      "minWordLengthOverride": 3,
+      "targetScoreMultiplier": 0.75,
+      "letterComplexity": "common",
+      "extraModifiers": {
+        "maxHidden": 0,
+        "maxDecoys": 0,
+        "maxLocked": 1
+      }
+    },
+    "medium": {
+      "name": "Medium",
+      "description": "Balanced letter distribution, standard 120s timer, and progressive round modifiers.",
+      "durationModifierSeconds": 0,
+      "minWordLengthOverride": 3,
+      "targetScoreMultiplier": 1.0,
+      "letterComplexity": "balanced",
+      "extraModifiers": {
+        "maxHidden": 1,
+        "maxDecoys": 1,
+        "maxLocked": 1
+      }
+    },
+    "hard": {
+      "name": "Hard",
+      "description": "Faster timer, tricky consonants, higher score targets, and multi-tile round hazards.",
+      "durationModifierSeconds": -20,
+      "minWordLengthOverride": 4,
+      "targetScoreMultiplier": 1.35,
+      "letterComplexity": "challenging",
+      "extraModifiers": {
+        "maxHidden": 2,
+        "maxDecoys": 1,
+        "maxLocked": 2
+      }
+    },
+    "extreme": {
+      "name": "Extreme",
+      "description": "High-intensity blitz with 4+ letter words, rare letters, decoys, hidden tiles, and chained locks.",
+      "durationModifierSeconds": -35,
+      "minWordLengthOverride": 4,
+      "targetScoreMultiplier": 1.7,
+      "letterComplexity": "expert",
+      "extraModifiers": {
+        "maxHidden": 2,
+        "maxDecoys": 2,
+        "maxLocked": 2
+      }
+    }
+  },
+  "modes": {
+    "classic": {
+      "name": "Classic Mode",
+      "description": "Standard collaborative word discovery with progressive round targets.",
+      "roundDuration": 120,
+      "boardSize": 7,
+      "minWordLength": 3,
+      "mandatoryCenterLetter": false,
+      "targetScoreBase": 120
+    },
+    "speed": {
+      "name": "Speed Blitz",
+      "description": "Fast-paced 60-second rounds with 6 letters and rapid progression.",
+      "roundDuration": 60,
+      "boardSize": 6,
+      "minWordLength": 3,
+      "mandatoryCenterLetter": false,
+      "targetScoreBase": 75
+    },
+    "marathon": {
+      "name": "Marathon Mode",
+      "description": "Extended 180-second rounds with 8 letters and escalating community targets.",
+      "roundDuration": 180,
+      "boardSize": 8,
+      "minWordLength": 4,
+      "mandatoryCenterLetter": false,
+      "targetScoreBase": 250
+    },
+    "community": {
+      "name": "Community Challenge",
+      "description": "Center letter required in every word! Audience collaborates to unlock the vault.",
+      "roundDuration": 150,
+      "boardSize": 7,
+      "minWordLength": 3,
+      "mandatoryCenterLetter": true,
+      "targetScoreBase": 160
+    },
+    "solo": {
+      "name": "Solo Mode",
+      "description": "Single-player puzzle mode playable directly in the browser without TikTok LIVE.",
+      "roundDuration": 120,
+      "boardSize": 7,
+      "minWordLength": 3,
+      "mandatoryCenterLetter": false,
+      "targetScoreBase": 90
+    },
+    "gift_challenge": {
+      "name": "Gift Challenge",
+      "description": "Audience gifts trigger instant letter hints, time extensions, and score frenzies.",
+      "roundDuration": 120,
+      "boardSize": 7,
+      "minWordLength": 3,
+      "mandatoryCenterLetter": false,
+      "targetScoreBase": 180
+    }
+  }
+}

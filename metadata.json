@@ -1,0 +1,6 @@
+{
+  "name": "LexiStream LIVE — Interactive Stream Word Arena",
+  "description": "Real-time multiplayer collaborative word puzzle game with TikTok LIVE chat, gift triggers, OBS streaming layouts, and host administration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

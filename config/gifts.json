@@ -1,0 +1,80 @@
+{
+  "giftsEnabled": true,
+  "tiers": [
+    {
+      "id": "rose",
+      "giftId": 5655,
+      "name": "Rose",
+      "tier": "small",
+      "diamondValue": 1,
+      "effect": "add_time_and_points",
+      "pointsAwarded": 10,
+      "timeAddedSeconds": 5,
+      "multiplier": 1,
+      "durationSeconds": 0,
+      "animation": "sparkle_burst",
+      "soundEffect": "gift_small",
+      "messageTemplate": "{user} sent a Rose! +10 Community Pts & +5s Time!"
+    },
+    {
+      "id": "tiktok_heart",
+      "giftId": 5269,
+      "name": "TikTok",
+      "tier": "small",
+      "diamondValue": 1,
+      "effect": "bonus_points",
+      "pointsAwarded": 15,
+      "timeAddedSeconds": 3,
+      "multiplier": 1,
+      "durationSeconds": 0,
+      "animation": "pulse_wave",
+      "soundEffect": "gift_small",
+      "messageTemplate": "{user} boosted the stream with {gift}! +15 Pts!"
+    },
+    {
+      "id": "finger_heart",
+      "giftId": 5487,
+      "name": "Finger Heart",
+      "tier": "medium",
+      "diamondValue": 5,
+      "effect": "reveal_hint",
+      "pointsAwarded": 25,
+      "timeAddedSeconds": 5,
+      "multiplier": 1,
+      "durationSeconds": 0,
+      "animation": "hint_beam",
+      "soundEffect": "gift_medium",
+      "messageTemplate": "{user} sent Finger Heart! Revealed a word hint + 25 Pts!"
+    },
+    {
+      "id": "doughnut",
+      "giftId": 5879,
+      "name": "Doughnut",
+      "tier": "medium",
+      "diamondValue": 30,
+      "effect": "score_multiplier",
+      "pointsAwarded": 50,
+      "timeAddedSeconds": 10,
+      "multiplier": 2,
+      "durationSeconds": 30,
+      "animation": "multiplier_aura",
+      "soundEffect": "gift_medium",
+      "messageTemplate": "{user} dropped a Doughnut! 2X SCORE MULTIPLIER for 30s!"
+    },
+    {
+      "id": "galaxy",
+      "giftId": 5999,
+      "name": "Galaxy",
+      "tier": "large",
+      "diamondValue": 1000,
+      "effect": "frenzy_bonus_round",
+      "pointsAwarded": 200,
+      "timeAddedSeconds": 30,
+      "multiplier": 3,
+      "durationSeconds": 45,
+      "animation": "cosmic_celebration",
+      "soundEffect": "gift_large",
+      "messageTemplate": "COSMIC ALERT! {user} sent a GALAXY! 3X Score Multiplier + 30s + Rare Word Revealed!"
+    }
+  ]
+}

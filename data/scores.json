@@ -1,0 +1,51 @@
+{
+  "allTime": {
+    "test_gifter": {
+      "userId": "test_gifter",
+      "username": "test_gifter",
+      "nickname": "test_gifter",
+      "totalPoints": 120,
+      "validWordsCount": 0,
+      "totalSubmissions": 0,
+      "longestWord": "",
+      "highestSingleWordScore": 0,
+      "giftsSentCount": 12,
+      "giftDiamondsTotal": 12,
+      "giftPointsContributed": 120,
+      "likesContributed": 0,
+      "lastActiveAt": 1794404545842
+    }
+  },
+  "today": {
+    "date": "2026-11-11",
+    "players": {
+      "test_gifter": {
+        "userId": "test_gifter",
+        "username": "test_gifter",
+        "nickname": "test_gifter",
+        "totalPoints": 120,
+        "validWordsCount": 0,
+        "totalSubmissions": 0,
+        "longestWord": "",
+        "highestSingleWordScore": 0,
+        "giftsSentCount": 12,
+        "giftDiamondsTotal": 12,
+        "giftPointsContributed": 120,
+        "likesContributed": 0,
+        "lastActiveAt": 1794404545842
+      }
+    }
+  },
+  "giftContributors": {
+    "test_gifter": {
+      "userId": "test_gifter",
+      "username": "test_gifter",
+      "nickname": "test_gifter",
+      "giftsSentCount": 12,
+      "giftDiamondsTotal": 12,
+      "giftPointsContributed": 120,
+      "lastGiftName": "Rose",
+      "lastGiftAt": 1794404545842
+    }
+  }
+}

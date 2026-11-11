@@ -1,0 +1,42 @@
+{
+  "tiktok": {
+    "username": "",
+    "autoReconnect": true,
+    "reconnectIntervalMs": 5000,
+    "enableChatEvents": true,
+    "enableGiftEvents": true,
+    "enableLikeEvents": true,
+    "enableFollowEvents": true,
+    "enableShareEvents": true
+  },
+  "moderation": {
+    "blockedUsers": [],
+    "excludedWords": ["badword", "spamword"],
+    "customWords": ["tiktok", "stream", "gamer", "chat", "emote", "hype", "viral", "squad"]
+  },
+  "audio": {
+    "masterVolume": 0.7,
+    "muted": false,
+    "sounds": {
+      "gameStart": true,
+      "countdown": true,
+      "validWord": true,
+      "invalidWord": true,
+      "highScore": true,
+      "giftReceived": true,
+      "newFollower": true,
+      "milestone": true,
+      "roundEnd": true,
+      "victory": true
+    }
+  },
+  "overlay": {
+    "theme": "obsidian_gold",
+    "scale": 1.0,
+    "transparentBackground": false,
+    "showChatFeed": true,
+    "showLeaderboard": true,
+    "width": 1920,
+    "height": 1080
+  }
+}

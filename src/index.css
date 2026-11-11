@@ -1,0 +1,351 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * THE MISSING PIECE — "FIND YOUR SPACE" 3D DELUXE EDITION
+ * Derived from /assets/aistudio/3d_logo_944e5372.png:
+ * - Deep Royal Plum / Amethyst Center (#12041d -> #4a1259)
+ * - Brushed Metallic Gold Puzzle & Embossed Type (#facc15 / #eab308 / #fde047)
+ * - Porcelain White & Silver Medallion Ring (#f8fafc / #f1f5f9)
+ */
+@theme {
+  --color-slate-950: #11031c;
+  --color-slate-900: #1e0730;
+  --color-slate-800: #341050;
+  --color-slate-700: #4f1b78;
+  --color-slate-600: #6f2c9e;
+  --color-slate-500: #9664bd;
+  --color-slate-400: #ceb6e6;
+  --color-slate-300: #e7daf5;
+  --color-slate-200: #f5f0fc;
+  --color-slate-100: #fdfbfe;
+
+  --color-amber-500: #eab308;
+  --color-amber-400: #facc15;
+  --color-amber-300: #fde047;
+  --color-amber-200: #fef08a;
+}
+
+@layer base {
+  :root {
+    --font-display: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: #11031c;
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(250, 204, 21, 0.14) 0%, transparent 45%),
+      radial-gradient(circle at 15% 25%, rgba(124, 58, 237, 0.28) 0%, transparent 50%),
+      radial-gradient(circle at 85% 75%, rgba(147, 51, 234, 0.22) 0%, transparent 55%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono, .tabular-nums {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* --- 3D PHYSICAL GAME TILE SYSTEM --- */
+
+.tile-stage-perspective {
+  perspective: 1100px;
+}
+
+/* 1. Porcelain-White & Royal Amethyst Framed 3D Arcade Tile (matching screenshot tiles with brand palette) */
+.tile-3d-royal {
+  background: linear-gradient(180deg, #ffffff 0%, #f5effc 72%, #e5d4f7 100%);
+  border: 2.5px solid #e9d8fd;
+  box-shadow:
+    0 7px 0 0 #230638,
+    0 9px 0 1px #9664bd,
+    0 14px 20px -4px rgba(17, 3, 28, 0.72),
+    inset 0 2px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 4px rgba(111, 44, 158, 0.2);
+  transform: translateY(0) rotateX(4deg);
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 150ms ease;
+}
+
+.tile-3d-royal:hover:not(:disabled) {
+  transform: translateY(-3px) rotateX(6deg) scale(1.03);
+  border-color: #fde047;
+  box-shadow:
+    0 10px 0 0 #230638,
+    0 12px 0 1px #facc15,
+    0 18px 26px -4px rgba(250, 204, 21, 0.32),
+    inset 0 2px 2px rgba(255, 255, 255, 1);
+}
+
+.tile-3d-royal:active:not(:disabled) {
+  transform: translateY(5px) rotateX(2deg);
+  box-shadow:
+    0 2px 0 0 #230638,
+    0 3px 0 1px #facc15,
+    0 5px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* Arcade Game-Show Cabinet Outer Frame */
+.arcade-board-cabinet {
+  background: linear-gradient(180deg, #5b1f8c 0%, #4a1775 45%, #3a105e 100%);
+  border: 4px solid #d8c2f2;
+  box-shadow:
+    0 0 0 3px #230638,
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    inset 0 0 40px rgba(26, 4, 43, 0.65);
+}
+
+/* Dotted Halftone Screen inside Top Marquee */
+.arcade-halftone-screen {
+  background-color: #210636;
+  background-image: radial-gradient(rgba(168, 85, 247, 0.26) 1.5px, transparent 1.5px);
+  background-size: 7px 7px;
+  box-shadow:
+    inset 0 4px 14px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 2px rgba(192, 132, 252, 0.3);
+}
+
+/* Perforated Track behind Hexagonal Tile Stage */
+.arcade-chevron-track {
+  background-color: #26083d;
+  background-image:
+    radial-gradient(circle, #140221 2.2px, transparent 2.5px),
+    radial-gradient(circle, #140221 2.2px, transparent 2.5px);
+  background-size: 10px 44px;
+  background-position: 0 5px, 0 33px;
+  border-top: 2px solid #9f6fd6;
+  border-bottom: 2px solid #9f6fd6;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* Pointed Hexagonal Tile Stage Tray */
+.arcade-hex-tray {
+  background: linear-gradient(180deg, #cfaef5 0%, #b384eb 50%, #9b66db 100%);
+  border-top: 2px solid #f5effc;
+  border-bottom: 3px solid #2b0846;
+  box-shadow:
+    0 8px 24px rgba(17, 3, 28, 0.75),
+    inset 0 2px 2px rgba(255, 255, 255, 0.65);
+}
+
+/* 2. Brushed 24k Gold 3D Tile (Center Required Piece) */
+.tile-3d-gold-center {
+  background: linear-gradient(160deg, #fef9c3 0%, #facc15 38%, #eab308 72%, #ca8a04 100%);
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 9px 0 0 #713f12,
+    0 11px 0 1px #fde047,
+    0 16px 28px -2px rgba(250, 204, 21, 0.42),
+    inset 0 2px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -3px 6px rgba(113, 63, 18, 0.45);
+  transform: translateY(0) rotateX(6deg);
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tile-3d-gold-center:hover:not(:disabled) {
+  transform: translateY(-4px) rotateX(8deg) scale(1.04);
+  box-shadow:
+    0 13px 0 0 #713f12,
+    0 15px 0 1px #fef08a,
+    0 24px 34px -2px rgba(250, 204, 21, 0.55),
+    inset 0 2px 3px rgba(255, 255, 255, 0.95),
+    inset 0 -3px 6px rgba(113, 63, 18, 0.45);
+}
+
+/* 3. Pressed / Selected Brushed Gold 3D Tile */
+.tile-3d-selected {
+  background: linear-gradient(160deg, #ffffff 0%, #fde047 35%, #facc15 75%, #eab308 100%);
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 3px 0 0 #78350f,
+    0 4px 0 2px #fde047,
+    0 0 25px rgba(250, 204, 21, 0.65),
+    inset 0 2px 2px rgba(255, 255, 255, 0.9);
+  transform: translateY(6px) rotateX(2deg) scale(0.98);
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 4. Discovered / Emerald Celebration 3D Tile */
+.tile-3d-discovered {
+  background: linear-gradient(160deg, #a7f3d0 0%, #34d399 40%, #10b981 80%, #059669 100%);
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 9px 0 0 #064e3b,
+    0 11px 0 2px #6ee7b7,
+    0 0 32px rgba(52, 211, 153, 0.7),
+    inset 0 2px 2px rgba(255, 255, 255, 0.9);
+  transform: translateY(-5px) rotateX(8deg) scale(1.06);
+  transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 5. Golden Bonus (+5 PTS) 3D Emerald-Gold Tile */
+.tile-3d-bonus {
+  background: linear-gradient(165deg, #065f46 0%, #047857 50%, #064e3b 100%);
+  border: 2px solid #6ee7b7;
+  box-shadow:
+    0 9px 0 0 #022c22,
+    0 11px 0 1px #34d399,
+    0 16px 24px -4px rgba(16, 185, 129, 0.38),
+    inset 0 2px 2px rgba(255, 255, 255, 0.45),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+  transform: translateY(0) rotateX(6deg);
+}
+
+/* 6. Mystery '?' Vault 3D Tile */
+.tile-3d-mystery {
+  background: linear-gradient(165deg, #581c87 0%, #3b0764 55%, #2e1065 100%);
+  border: 2px solid #fde047;
+  box-shadow:
+    0 9px 0 0 #17032b,
+    0 11px 0 1px #facc15,
+    0 0 24px rgba(250, 204, 21, 0.32),
+    inset 0 2px 2px rgba(254, 240, 138, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6);
+  transform: translateY(0) rotateX(6deg);
+}
+
+/* 7. Locked Chained 3D Tile */
+.tile-3d-locked {
+  background: linear-gradient(180deg, #271538 0%, #180b24 100%);
+  border: 2px dashed #6d2c9b;
+  box-shadow:
+    0 6px 0 0 #0b0212,
+    0 10px 16px rgba(0, 0, 0, 0.65),
+    inset 0 2px 4px rgba(0, 0, 0, 0.65);
+  transform: translateY(2px) rotateX(4deg);
+}
+
+/* 8. Exposed Decoy Trap 3D Tile */
+.tile-3d-decoy {
+  background: linear-gradient(180deg, #4c0519 0%, #2b020d 100%);
+  border: 2px solid #f43f5e;
+  box-shadow:
+    0 5px 0 0 #1f0109,
+    0 10px 18px rgba(244, 63, 94, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.2);
+  transform: translateY(3px) rotateX(4deg);
+}
+
+/* 3D Embossed Typography on Tiles */
+.tile-letter-emboss-light {
+  text-shadow:
+    0 2px 0 #1a042b,
+    0 3px 0 #12021e,
+    0 5px 10px rgba(0, 0, 0, 0.65);
+}
+
+.tile-letter-emboss-dark {
+  color: #1f0633;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.75),
+    0 -1px 0 rgba(113, 63, 18, 0.35);
+}
+
+/* Mini 3D Tile for Word Builder & Discovered Plaques */
+.mini-tile-3d-gold {
+  background: linear-gradient(160deg, #fef08a 0%, #facc15 55%, #eab308 100%);
+  border: 1.5px solid #ffffff;
+  color: #1c052e;
+  box-shadow:
+    0 3px 0 0 #854d0e,
+    0 5px 10px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+/* Recessed Stage Tray for the Board */
+.stage-arena-well {
+  background:
+    radial-gradient(circle at 50% 35%, rgba(124, 58, 237, 0.28) 0%, rgba(17, 3, 28, 0.92) 72%),
+    linear-gradient(180deg, #190529 0%, #11031c 100%);
+  box-shadow:
+    inset 0 4px 20px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 1px rgba(250, 204, 21, 0.18),
+    0 12px 32px -8px rgba(0, 0, 0, 0.7);
+}
+
+/* Animated Gold Progress Bar Shimmer */
+@keyframes goldShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.progress-gold-shimmer {
+  background: linear-gradient(90deg, #eab308 0%, #fef08a 50%, #facc15 75%, #eab308 100%);
+  background-size: 200% 100%;
+  animation: goldShimmer 2.6s linear infinite;
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.55);
+}
+
+@keyframes tilePop {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.88) rotateX(18deg);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.03) rotateX(4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(6deg);
+  }
+}
+
+@keyframes wordCelebrate {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseUrgent {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.88;
+  }
+}
+
+.animate-tile-pop {
+  animation: tilePop 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-word-celebrate {
+  animation: wordCelebrate 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-urgent {
+  animation: pulseUrgent 800ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-tile-pop,
+  .animate-word-celebrate,
+  .animate-urgent,
+  .progress-gold-shimmer {
+    animation: none !important;
+  }
+}
