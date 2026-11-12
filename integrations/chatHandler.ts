@@ -28,7 +28,7 @@ export class ChatHandler {
     const simulated = Boolean(payload.simulated);
     const displayName = payload.nickname || payload.username || 'Viewer';
 
-    // Check if this is a configured chat command (e.g. !score, !top, !words, !time, !help, !join, !stats)
+    // Check if this is a supported system command (!score, !top, !words, !time, !help, !join, !stats)
     if (rawText.startsWith(prefix)) {
       const parts = rawText.slice(prefix.length).trim().split(/\s+/);
       const cmd = (parts[0] || '').toLowerCase();
@@ -39,53 +39,92 @@ export class ChatHandler {
         }
         return this.executeCommand(cmd, payload, simulated);
       }
+    }
 
-      // If `requirePrefixForWords` is enabled, e.g. "!apple", treat the text after prefix as word
-      if (gameConfig.requirePrefixForWords) {
-        const candidateWord = parts[0] || '';
-        return gameEngine.submitWord({
+    // Strip common command prefixes or wrappers (e.g., "!guess stream", "!w stream", "word: stream", "!apple")
+    let cleanedText = rawText;
+    if (cleanedText.startsWith(prefix)) {
+      cleanedText = cleanedText.slice(prefix.length).trim();
+    }
+    cleanedText = cleanedText.replace(/^(guess|word|w|answer|find)[:\s]+/i, '').trim();
+
+    // Extract word tokens from comment
+    const tokens = cleanedText.split(/[\s,.:;!?"'()-]+/).filter(Boolean);
+    if (tokens.length === 0) {
+      return { handled: false, reason: 'NO_TOKENS' };
+    }
+
+    // 1. If it's a single word token, submit it directly to game engine
+    if (tokens.length === 1) {
+      const candidateWord = tokens[0].replace(/[^a-zA-Z]/g, '');
+      if (!candidateWord) {
+        gameEngine.pushChatFeed({
           userId: payload.userId,
           username: payload.username,
           nickname: displayName,
           avatarUrl: payload.avatarUrl,
-          word: candidateWord,
-          source: simulated ? 'simulation' : 'tiktok',
+          text: rawText.slice(0, 80),
+          status: 'chat',
+          simulated,
         });
+        return { handled: true, type: 'chat' };
       }
-    }
 
-    if (gameConfig.requirePrefixForWords && !rawText.startsWith(prefix)) {
-      return { handled: false, reason: 'PREFIX_REQUIRED' };
-    }
-
-    // Extract single word submission (ignore multi-word sentences of > 2 words so normal chat doesn't spam errors)
-    const tokens = rawText.split(/\s+/).filter(Boolean);
-    if (tokens.length > 1) {
-      gameEngine.pushChatFeed({
+      return gameEngine.submitWord({
         userId: payload.userId,
         username: payload.username,
         nickname: displayName,
         avatarUrl: payload.avatarUrl,
-        text: rawText.slice(0, 80),
-        status: 'chat',
-        simulated,
+        word: candidateWord,
+        source: simulated ? 'simulation' : 'tiktok',
       });
-      return { handled: true, type: 'chat' };
     }
 
-    const candidateWord = tokens[0].replace(/[^a-zA-Z]/g, '');
-    if (!candidateWord) {
-      return { handled: false, reason: 'NO_LETTERS' };
+    // 2. If it's a multi-word message (e.g. "I think STREAM is on the board" or "!guess STREAM"), check if any token is a valid word on the board!
+    const state = gameEngine.getFullState();
+    const boardLetters = state.board.letters;
+    const discoveredSet = new Set(state.discoveredWords.map((d) => d.word.toLowerCase()));
+
+    for (const token of tokens) {
+      const cleanToken = token.replace(/[^a-zA-Z]/g, '');
+      if (cleanToken.length >= (gameConfig.minWordLength || 3)) {
+        const validation = gameEngine['validator'].validateSubmission({
+          word: cleanToken,
+          boardLetters,
+          discoveredWords: discoveredSet,
+          minWordLength: gameConfig.minWordLength || 3,
+          maxWordLength: gameConfig.maxWordLength || 10,
+          mandatoryCenterLetter: state.board.centerLetter,
+          activeLockedIndices: [],
+          decoyIndices: [],
+          hiddenIndices: [],
+          bonusTileIndices: [],
+        });
+
+        if (validation.valid) {
+          return gameEngine.submitWord({
+            userId: payload.userId,
+            username: payload.username,
+            nickname: displayName,
+            avatarUrl: payload.avatarUrl,
+            word: cleanToken,
+            source: simulated ? 'simulation' : 'tiktok',
+          });
+        }
+      }
     }
 
-    return gameEngine.submitWord({
+    // 3. General multi-word chat message -> Record in chat stream so all viewer messages appear live!
+    gameEngine.pushChatFeed({
       userId: payload.userId,
       username: payload.username,
       nickname: displayName,
       avatarUrl: payload.avatarUrl,
-      word: candidateWord,
-      source: simulated ? 'simulation' : 'tiktok',
+      text: rawText.slice(0, 100),
+      status: 'chat',
+      simulated,
     });
+    return { handled: true, type: 'chat' };
   }
 
   private isSupportedCommand(cmd: string): boolean {

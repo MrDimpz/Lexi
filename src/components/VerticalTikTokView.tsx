@@ -186,28 +186,42 @@ export const VerticalTikTokView: React.FC<VerticalTikTokViewProps> = ({
             )}
           </div>
 
-          <div className="rounded-xl bg-slate-900/90 border border-slate-800 p-2.5">
-            <div className="text-[11px] font-semibold text-slate-300 flex items-center gap-1 mb-1.5">
-              <MessageSquare className="w-3.5 h-3.5 text-sky-400" />
-              <span>Live Chat Feed</span>
+          <div className="rounded-xl bg-[#19032b]/95 border border-[#6d2ea6]/70 p-2.5">
+            <div className="text-[11px] font-semibold text-amber-300 flex items-center justify-between mb-1.5">
+              <span className="flex items-center gap-1">
+                <MessageSquare className="w-3.5 h-3.5 text-amber-300" />
+                <span>Live Chat & Answers</span>
+              </span>
+              <span className="text-[10px] font-mono text-purple-200">TikTok LIVE</span>
             </div>
-            <div className="flex flex-col gap-1 max-h-16 overflow-hidden">
-              {gameState.chatFeed.slice(0, 3).map((item) => (
-                <div key={item.id} className="text-[11px] truncate">
-                  <span className="text-slate-400 font-medium">{item.nickname}: </span>
-                  <span
-                    className={
-                      item.status === 'accepted'
-                        ? 'text-emerald-400 font-mono font-bold'
-                        : item.status === 'rejected'
-                        ? 'text-rose-400'
-                        : 'text-slate-200'
-                    }
-                  >
-                    {item.text}
-                  </span>
+            <div className="flex flex-col gap-1 max-h-20 overflow-hidden">
+              {gameState.chatFeed.length === 0 ? (
+                <div className="text-[10px] text-purple-200/50 py-1 text-center">
+                  Chat answers appear here live...
                 </div>
-              ))}
+              ) : (
+                gameState.chatFeed.slice(0, 4).map((item) => (
+                  <div key={item.id} className="text-[10px] flex items-center justify-between gap-1.5 truncate">
+                    <div className="truncate">
+                      <span className="text-amber-200 font-bold">{item.nickname}: </span>
+                      <span className="text-white font-mono font-semibold">{item.text}</span>
+                    </div>
+                    {item.status === 'accepted' ? (
+                      <span className="font-mono text-[9px] font-extrabold text-emerald-300 bg-emerald-950 px-1 rounded border border-emerald-400/60 shrink-0">
+                        +{item.points || 0}
+                      </span>
+                    ) : item.status === 'rejected' ? (
+                      <span className="font-mono text-[9px] font-bold text-rose-300 bg-rose-950 px-1 rounded border border-rose-400/50 shrink-0">
+                        REJECTED
+                      </span>
+                    ) : item.status === 'command' ? (
+                      <span className="font-mono text-[9px] font-bold text-sky-300 bg-sky-950 px-1 rounded shrink-0">
+                        CMD
+                      </span>
+                    ) : null}
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>

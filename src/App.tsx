@@ -8,6 +8,7 @@ import { useGameClient } from './services/gameClient.ts';
 import { LetterBoard } from './components/LetterBoard.tsx';
 import { DiscoveredWordsGrid } from './components/DiscoveredWordsGrid.tsx';
 import { LiveLeaderboardPanel } from './components/LiveLeaderboardPanel.tsx';
+import { LiveStreamChatPanel } from './components/LiveStreamChatPanel.tsx';
 import { StreamOverlays } from './components/StreamOverlays.tsx';
 import { VerticalTikTokView } from './components/VerticalTikTokView.tsx';
 import { ObsOverlayView } from './components/ObsOverlayView.tsx';
@@ -519,8 +520,14 @@ export default function App() {
               </div>
             </div>
 
-            {/* SIDE SECTION (4 cols): Live Leaderboard, Progressive Mechanics & Stream Simulator */}
+            {/* SIDE SECTION (4 cols): Live TikTok Chat & Answers Stream, Leaderboard, Stream Simulator */}
             <aside className="lg:col-span-4 flex flex-col gap-5">
+              <LiveStreamChatPanel
+                chatFeed={gameState.chatFeed}
+                onSimulateChat={(text, username) =>
+                  simulateEvent({ type: 'chat_custom', text, username })
+                }
+              />
               <LiveLeaderboardPanel leaderboards={gameState.leaderboards} />
 
               {/* Quick Stream & Progressive Mechanics Simulator Bar */}

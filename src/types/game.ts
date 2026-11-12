@@ -285,6 +285,7 @@ export interface GameFullState {
   settingsConfig: {
     tiktok: {
       username: string;
+      apiKey?: string;
       autoReconnect: boolean;
       reconnectIntervalMs: number;
       enableChatEvents: boolean;

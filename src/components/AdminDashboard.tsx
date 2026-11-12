@@ -460,12 +460,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </form>
 
               {gameState.tiktok.lastError && (
-                <div className="mb-3 px-3.5 py-2.5 rounded-lg bg-rose-950/60 border border-rose-800 text-xs text-rose-200">
-                  <strong>Connection Notice:</strong> {gameState.tiktok.lastError}
+                <div className="mb-3 p-3.5 rounded-xl bg-rose-950/80 border-2 border-rose-500/80 text-xs text-rose-100 flex flex-col gap-2 shadow-lg">
+                  <div className="flex items-center gap-2 font-bold text-rose-200">
+                    <ShieldAlert className="w-4 h-4 text-rose-400 shrink-0" />
+                    <span>TikTok Connection Notice:</span>
+                  </div>
+                  <div className="font-mono text-rose-200 leading-relaxed break-words">
+                    {gameState.tiktok.lastError}
+                  </div>
+                  {gameState.tiktok.lastError.includes('Rate Limited') && (
+                    <div className="pt-2 border-t border-rose-800/80 flex flex-wrap items-center justify-between gap-2 text-slate-200">
+                      <span>EulerStream sign server rate limit reset in ~60s. Or test immediately:</span>
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab('simulation')}
+                        className="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors"
+                      >
+                        <FlaskConical className="w-3.5 h-3.5" />
+                        <span>Open Interactive Simulation Mode</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
 
-              <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-3 pt-1 text-xs text-slate-300">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"

@@ -83,6 +83,7 @@ export interface GameConfig {
 export interface SettingsConfig {
   tiktok: {
     username: string;
+    apiKey?: string;
     autoReconnect: boolean;
     reconnectIntervalMs: number;
     enableChatEvents: boolean;
@@ -772,6 +773,16 @@ export class GameEngine {
         (u) => u.toLowerCase() === cleanUser.toLowerCase() || u.toLowerCase() === params.userId.toLowerCase()
       )
     ) {
+      this.pushChatFeed({
+        userId: params.userId,
+        username: cleanUser,
+        nickname,
+        avatarUrl: params.avatarUrl,
+        text: params.word.toUpperCase(),
+        status: 'rejected',
+        reason: 'User Blocked',
+        simulated,
+      });
       return {
         accepted: false,
         word: params.word,
@@ -781,6 +792,16 @@ export class GameEngine {
     }
 
     if (params.source === 'tiktok' && !this.gameConfig.allowChatSubmissions) {
+      this.pushChatFeed({
+        userId: params.userId,
+        username: cleanUser,
+        nickname,
+        avatarUrl: params.avatarUrl,
+        text: params.word.toUpperCase(),
+        status: 'rejected',
+        reason: 'Submissions Paused',
+        simulated,
+      });
       return {
         accepted: false,
         word: params.word,
@@ -806,6 +827,16 @@ export class GameEngine {
 
     const status = this.rounds.getStatus();
     if (status !== 'ACTIVE') {
+      this.pushChatFeed({
+        userId: params.userId,
+        username: cleanUser,
+        nickname,
+        avatarUrl: params.avatarUrl,
+        text: params.word.toUpperCase(),
+        status: 'rejected',
+        reason: status === 'PAUSED' ? 'Round Paused' : 'Round Inactive',
+        simulated,
+      });
       return {
         accepted: false,
         word: params.word,
